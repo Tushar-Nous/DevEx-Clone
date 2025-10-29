@@ -639,61 +639,217 @@ app.post('/generate-guidelines', async (req, res) => {
     }
 });
 
+// Helper function to filter relevant personas based on requirement context
+function filterRelevantPersonas(requirement, allPersonas) {
+    const requirementLower = requirement.toLowerCase();
+    
+    // Define technical requirement indicators
+    const technicalIndicators = [
+        'system', 'application', 'platform', 'software', 'build', 'develop',
+        'implement', 'create', 'integration', 'api', 'database', 'backend',
+        'frontend', 'architecture', 'code', 'microservice', 'service',
+        'processing', 'automation', 'workflow', 'algorithm', 'ml', 'ai-powered'
+    ];
+    
+    // Check if this is a technical requirement
+    const isTechnicalRequirement = technicalIndicators.some(indicator => 
+        requirementLower.includes(indicator)
+    );
+    
+    // Score each persona based on relevance to requirement
+    const scoredPersonas = allPersonas.map(persona => {
+        let score = 0;
+        const contextKeywords = persona.context.split(',').map(k => k.trim().toLowerCase());
+        const responsibilities = persona.responsibilities.join(' ').toLowerCase();
+        const painPoints = persona.painPoints.join(' ').toLowerCase();
+        const goals = persona.goals.join(' ').toLowerCase();
+        const personaName = persona.name.toLowerCase();
+        
+        // Boost developer persona for any technical requirement
+        if (isTechnicalRequirement && 
+            (personaName.includes('developer') || personaName.includes('engineer'))) {
+            score += 5; // Strong boost for developers in technical requirements
+        }
+        
+        // Check context keywords (exact matches)
+        contextKeywords.forEach(keyword => {
+            if (requirementLower.includes(keyword)) {
+                score += 3; // Higher weight for direct context match
+            }
+        });
+        
+        // Check for partial keyword matches in context
+        const requirementWords = requirementLower.split(/\s+/);
+        requirementWords.forEach(word => {
+            if (word.length > 4) { // Only check meaningful words
+                contextKeywords.forEach(keyword => {
+                    if (keyword.includes(word) || word.includes(keyword)) {
+                        score += 1; // Partial match bonus
+                    }
+                });
+            }
+        });
+        
+        // Check responsibilities
+        if (responsibilities.split(' ').some(word => 
+            word.length > 4 && requirementLower.includes(word.toLowerCase())
+        )) {
+            score += 2;
+        }
+        
+        // Check pain points and goals
+        if (painPoints.split(' ').some(word => 
+            word.length > 4 && requirementLower.includes(word.toLowerCase())
+        )) {
+            score += 1;
+        }
+        if (goals.split(' ').some(word => 
+            word.length > 4 && requirementLower.includes(word.toLowerCase())
+        )) {
+            score += 1;
+        }
+        
+        return { persona, score };
+    });
+    
+    // Sort by relevance score
+    scoredPersonas.sort((a, b) => b.score - a.score);
+    
+    // Log scores for debugging
+    console.log('📊 Persona Relevance Scores:');
+    scoredPersonas.forEach(p => {
+        console.log(`  ${p.persona.name}: ${p.score} points`);
+    });
+    
+    // Return top relevant personas (at least 2, max 5 for complex requirements)
+    const threshold = 3;
+    const highScorePersonas = scoredPersonas.filter(p => p.score >= threshold);
+    
+    if (highScorePersonas.length >= 2) {
+        // Return personas with score >= threshold, max 5 for complex requirements
+        return highScorePersonas.slice(0, 5).map(p => p.persona);
+    } else {
+        // Return top 4 personas even with low scores for variety
+        return scoredPersonas.slice(0, 4).map(p => p.persona);
+    }
+}
+
 // Agile Artifacts System Prompt with Persona Context
-const AGILE_SYSTEM_PROMPT_WITH_PERSONAS = (personasContext) => `
+const AGILE_SYSTEM_PROMPT_WITH_PERSONAS = (personasContext, personaCount) => `
 You are a Business Analyst expert in Agile methodology and Design Thinking.
-You will convert user requirements into Agile artifacts with persona-based user stories.
+You will convert user requirements into comprehensive Agile artifacts with persona-based user stories.
 
-CRITICAL REQUIREMENTS:
-1. ALL user stories MUST use ONLY the provided persona names - NO generic roles
-2. Format: "As a [Exact Persona Name], I want [goal] so that [benefit]"
-3. Each story MUST include 3-5 specific acceptance criteria using Gherkin format (Given/When/Then)
-4. Stories MUST be independently deliverable
-5. Match personas to stories based on their responsibilities, goals, and pain points
+CRITICAL REQUIREMENTS - READ CAREFULLY:
+1. Break down the requirement into 5-10 distinct features (each feature = logical grouping)
+2. Generate 3-5 user stories PER feature (covering different personas and aspects)
+3. MANDATORY: Use EVERY provided persona multiple times across different features
+4. ALL user stories MUST use ONLY the provided persona names - NO generic roles
+5. Format: "As a [Exact Persona Name], I want [goal] so that [benefit]"
+6. Each story MUST include 3-5 specific acceptance criteria using Gherkin format (Given/When/Then)
 
-AVAILABLE PERSONAS (from empathy phase research):
+PERSONA COVERAGE REQUIREMENT:
+The ${personaCount} personas below were intelligently selected as relevant to this requirement.
+YOU MUST use each persona AT LEAST 3-5 times across different features and stories.
+
+AVAILABLE PERSONAS (pre-filtered for relevance):
 ${personasContext}
 
-OUTPUT STRUCTURE:
+OUTPUT STRUCTURE - FOLLOW EXACTLY:
 Epic: [High-level business objective]
 
 Features:
-  Feature 1: [Functional grouping]
+  Feature 1: [First capability - e.g., "Automated Claim Intake"]
     User Stories:
-      - Story 1: As a [Exact Persona Name], I want [capability] so that [business value]
+      - Story 1: As a [Persona Name], I want [specific capability] so that [business value]
         Acceptance Criteria:
           • Given [context]
           • When [action]
           • Then [expected result]
-          • [Additional 2-4 criteria...]
+          • [3-5 total criteria...]
         Priority: [High/Medium/Low]
         Story Points: [1/2/3/5/8/13]
-        
-      - Story 2: [Another story...]
+      
+      - Story 2: As a [Different Persona], I want [different aspect of same feature] so that [value]
         Acceptance Criteria: [3-5 criteria]
+      
+      - Story 3: As a [Another Persona], I want [another aspect] so that [value]
+        Acceptance Criteria: [3-5 criteria]
+      
+      [3-5 stories per feature]
 
-  Feature 2: [Another feature]
-    User Stories: ...
+  Feature 2: [Second capability - e.g., "AI-Powered Damage Assessment"]
+    User Stories: [3-5 stories covering different personas and aspects]
+  
+  Feature 3: [Third capability - e.g., "Third-Party Integration"]
+    User Stories: [3-5 stories]
+  
+  [Continue for 5-10 features total]
 
-PERSONA MATCHING GUIDELINES:
-- QA Engineer: Testing, quality assurance, bug tracking, validation, automation stories
-- Senior Developer: Implementation, architecture, technical debt, code quality stories
-- DevOps Engineer: Deployment, infrastructure, CI/CD, monitoring, automation stories
-- Security Analyst: Security, compliance, vulnerability, audit, risk management stories
-- Product Manager: Feature planning, prioritization, stakeholder, roadmap stories
-- Data Analyst: Reporting, analytics, dashboards, insights, metrics stories
+STORY GENERATION RULES - MANDATORY:
+1. For EACH requirement bullet point, create at least 1 feature
+2. For EACH feature, generate 3-5 user stories from different perspectives:
+   - Senior Developer: Implementation, architecture, integration, coding
+   - DevOps Engineer: Deployment, infrastructure, monitoring, CI/CD
+   - QA Engineer: Testing, validation, quality assurance, test automation
+   - Security Analyst: Security testing, vulnerability assessment, compliance
+   - Data Analyst: Data processing, analytics, reporting, insights
+   - Product Manager: User experience, business value, prioritization
+
+3. Technical features (APIs, integrations, systems, automation) MUST include:
+   ✅ Senior Developer stories for implementation
+   ✅ DevOps Engineer stories for deployment/infrastructure
+   ✅ QA Engineer stories for testing
+   ✅ Security Analyst stories if security-related
+
+4. Data features (analytics, reporting, dashboards) MUST include:
+   ✅ Data Analyst stories for data processing
+   ✅ Senior Developer stories for implementation
+   ✅ QA Engineer stories for validation
+
+COMPREHENSIVE COVERAGE CHECKLIST:
+For a complex system requirement, you should generate approximately:
+- 5-10 features (one per major capability)
+- 3-5 stories per feature
+- Total: 15-50 user stories (depending on complexity)
+- Each persona should appear 3-8 times across different features
 
 VALIDATION RULES:
 ❌ NEVER use generic terms: "System Admin", "User", "Analyst", "Developer", "Tester", "Admin"
-✅ ALWAYS use exact persona names: "QA Engineer", "Senior Developer", "DevOps Engineer", etc.
+❌ NEVER invent persona names not in the list above
+❌ NEVER generate less than 3 stories per feature
+❌ NEVER skip a provided persona - ALL must be used multiple times
+✅ ALWAYS use exact persona names from the provided list
+✅ ALWAYS break down complex requirements into multiple features
+✅ ALWAYS generate sufficient stories to cover the feature comprehensively
 ✅ Each story must have 3-5 acceptance criteria minimum
-✅ Stories must be independently deliverable (no dependencies on other stories)
-✅ Personas must match story context and goals
+✅ Stories must be independently deliverable
 
 Keep language clear, actionable, and aligned to Agile best practices.
+
+EXAMPLE FOR COMPLEX REQUIREMENTS:
+If a requirement has 10 bullet points (like "automated intake, AI assessment, integration, fraud detection, workflow automation, customer portal, policy integration, compliance, analytics, mobile app, payment processing"), you should generate:
+
+Feature 1: Automated Claim Intake
+  - Story 1: As a Senior Developer, I want to implement multi-channel claim intake APIs...
+  - Story 2: As a QA Engineer, I want to validate claim data from all channels...
+  - Story 3: As a Security Analyst, I want to secure claim submission endpoints...
+  
+Feature 2: AI-Powered Damage Assessment  
+  - Story 1: As a Senior Developer, I want to integrate ML models for image recognition...
+  - Story 2: As a Data Analyst, I want to analyze damage assessment accuracy...
+  - Story 3: As a QA Engineer, I want to test ML model predictions...
+
+Feature 3: Third-Party Integration
+  - Story 1: As a Senior Developer, I want to build REST APIs for assessor integration...
+  - Story 2: As a DevOps Engineer, I want to monitor third-party API performance...
+  - Story 3: As a Security Analyst, I want to implement OAuth for partner access...
+
+[Continue for 10+ features with 3-5 stories each]
+
+This ensures comprehensive coverage with 30-50 total user stories for complex systems.
 `;
 
-// Helper function to format personas for AI prompt
+// Helper function to format personas for AI prompt with full empathy data
 function formatPersonasForPrompt(personas) {
     return personas.map(p => `
 • ${p.name} (${p.title}) - ${p.department}
@@ -701,7 +857,11 @@ function formatPersonasForPrompt(personas) {
   Goals: ${p.goals.join(', ')}
   Pain Points: ${p.painPoints.join(', ')}
   Context Keywords: ${p.context}
-  Empathy Quote: "${p.empathyData.quote}"
+  
+  **Empathy Phase Research:**
+  - Quote: "${p.empathyData.quote}"
+  - Frustrations: ${p.empathyData.frustrations.join('; ')}
+  - Motivations: ${p.empathyData.motivations.join('; ')}
 `).join('\n');
 }
 
@@ -800,12 +960,19 @@ app.post('/generate-agile-artifacts', async (req, res) => {
             return res.status(400).json({ error: "Requirement is required" });
         }
 
-        // Load personas from storage
-        const personas = await loadJsonData(PERSONAS_FILE);
-        const personasContext = formatPersonasForPrompt(personas);
+        // Load all personas from storage
+        const allPersonas = await loadJsonData(PERSONAS_FILE);
+        
+        // Filter to get only relevant personas for this requirement
+        const relevantPersonas = filterRelevantPersonas(requirement, allPersonas);
+        
+        console.log(`📊 Filtered ${relevantPersonas.length} relevant personas from ${allPersonas.length} total:`);
+        relevantPersonas.forEach(p => console.log(`  - ${p.name} (${p.title})`));
+        
+        const personasContext = formatPersonasForPrompt(relevantPersonas);
 
-        // Use enhanced system prompt with persona context
-        const systemPrompt = AGILE_SYSTEM_PROMPT_WITH_PERSONAS(personasContext);
+        // Use enhanced system prompt with relevant persona context
+        const systemPrompt = AGILE_SYSTEM_PROMPT_WITH_PERSONAS(personasContext, relevantPersonas.length);
 
         const messages = [
             { role: "system", content: systemPrompt },
@@ -822,13 +989,14 @@ app.post('/generate-agile-artifacts', async (req, res) => {
         const result = response.choices[0].message.content;
         
         // Validate and enhance the response
-        const validatedResult = validatePersonaUsageInResponse(result, personas);
+        const validatedResult = validatePersonaUsageInResponse(result, relevantPersonas);
         const personasUsed = extractPersonasFromResponse(validatedResult);
         
         // Store the generated agile artifacts in JSON
         const agileRecord = {
             requirement: requirement,
             agile_artifacts: validatedResult,
+            personas_available: relevantPersonas.map(p => ({ id: p.id, name: p.name })),
             personas_used: personasUsed,
             type: "agile_artifacts"
         };
@@ -840,15 +1008,17 @@ app.post('/generate-agile-artifacts', async (req, res) => {
                 success: true,
                 agile_artifacts: validatedResult,
                 requirement: requirement,
+                personas_available: relevantPersonas.map(p => p.name),
                 personas_used: personasUsed,
                 id: agileRecord.id,
-                message: "Agile artifacts generated with persona context"
+                message: `Agile artifacts generated with ${relevantPersonas.length} relevant personas`
             });
         } else {
             return res.json({
                 success: true,
                 agile_artifacts: validatedResult,
                 requirement: requirement,
+                personas_available: relevantPersonas.map(p => p.name),
                 personas_used: personasUsed,
                 warning: "Agile artifacts generated but storage failed"
             });
