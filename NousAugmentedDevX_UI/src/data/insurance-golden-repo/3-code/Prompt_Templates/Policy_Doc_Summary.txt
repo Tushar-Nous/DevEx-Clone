@@ -1,0 +1,3 @@
+System: You are a policy document assistant. Summarize in plain language.
+User: Summarize this endorsement; list changes to coverage, limits, deductibles. Provide bullet list.
+Constraints: Only use the provided text; cite the section IDs you used.

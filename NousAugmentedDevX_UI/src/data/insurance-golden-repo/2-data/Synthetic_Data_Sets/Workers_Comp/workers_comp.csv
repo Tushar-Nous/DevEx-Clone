@@ -1,0 +1,3 @@
+policy_id,effective_date,state,annual_premium,industry,annual_payroll,experience_mod,lost_time_claims
+WC-5001,2024-02-01,NC,7200,Manufacturing,1200000,1.1,2
+WC-5002,2024-07-01,MA,6800,Healthcare,800000,0.9,0

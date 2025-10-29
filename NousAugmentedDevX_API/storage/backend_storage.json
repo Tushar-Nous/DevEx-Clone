@@ -1,0 +1,111 @@
+[
+  {
+    "id": "backend_1759988427492_lsv5jq44j",
+    "projectName": "test-backend",
+    "timestamp": "2025-10-09T05:40:27.492Z",
+    "input": {
+      "projectDescription": "rest api",
+      "requirements": "create a rest api",
+      "language": "typescript",
+      "framework": "NestJS",
+      "database": "mysql",
+      "cloud": "None specified",
+      "additionalRequirements": "None specified",
+      "inputType": "chat",
+      "fileName": null
+    },
+    "output": {
+      "features": [
+        "Comprehensive Project Structure",
+        "Technology-Specific Guidance",
+        "Security & Quality",
+        "Documentation & Maintenance",
+        "DevOps Integration"
+      ],
+      "technologies": [
+        "TypeScript",
+        "NestJS",
+        "MySQL"
+      ],
+      "bestPractices": [
+        "Code reviews",
+        "Testing",
+        "Logging",
+        "Documentation"
+      ],
+      "files": [
+        {
+          "path": "src/index.ts",
+          "content": "// minimal web server bootstrap"
+        },
+        {
+          "path": "src/routes/health.ts",
+          "content": "// health route"
+        },
+        {
+          "path": ".env.example",
+          "content": "PORT=3000\nNODE_ENV=development"
+        },
+        {
+          "path": "README.md",
+          "content": "# test-backend\n\nGenerated scaffold. Follow the prompt below to implement remaining pieces."
+        }
+      ],
+      "folderStructure": "Detailed project folder structure in text format",
+      "scaffold": "bash script that creates the folders/files",
+      "prompt": "# Enterprise Backend Development Prompt\n\nIn the fast-paced world of insurance, where customer expectations are constantly evolving, the need for a robust backend system to support insurance applications has never been more critical. Our project, named test-backend, aims to develop a REST API using TypeScript and the NestJS framework, with MySQL as the database. This backend will serve as the backbone for various insurance domain applications, providing seamless communication between frontend interfaces and data storage.\n\n## Project Overview\n- Project Name: test-backend\n- Description: REST API\n- Language: TypeScript\n- Framework: NestJS\n- Database: MySQL\n- Cloud Platform: None specified\n\n## Technology Stack\n- TypeScript\n- NestJS\n- MySQL\n\n## Requirements Analysis\nThe primary requirement for this project is to create a REST API that can handle various insurance-related operations efficiently. This includes endpoints for policy management, claims processing, customer information retrieval, and more.\n\n## Enterprise Folder Structure\n```\nsrc\n├── controllers\n|   ├── policy.controller.ts # Handles policy-related API logic\n|   └── claims.controller.ts # Manages claims processing logic\n├── models\n|   ├── policy.model.ts # Defines the structure of policy data\n|   └── claims.model.ts # Defines the structure of claims data\n├── routes\n|   ├── policy.routes.ts # Routes related to policy operations\n|   └── claims.routes.ts # Routes related to claims operations\n├── services\n|   ├── policy.service.ts # Implements business logic for policies\n|   └── claims.service.ts # Implements business logic for claims\n├── utils\n|   ├── logger.ts # Utility for logging\n|   └── validator.ts # Utility for data validation\n├── config\n|   └── database.config.ts # Configuration for MySQL connection\n└── test\n    ├── policy.test.ts # Unit tests for policy-related functionality\n    └── claims.test.ts # Unit tests for claims-related functionality\n```\nFile-to-Folder Mapping:\n- Controllers: API logic handling\n- Models: Data structure definitions\n- Routes: API route definitions\n- Services: Business logic implementation\n- Utils: Utility functions\n- Config: Configuration files\n- Test: Unit tests\n\n## Implementation Guidelines\n1. Define clear API endpoints for each insurance operation\n2. Implement data validation to ensure data integrity\n3. Use dependency injection for better code maintainability\n4. Implement error handling to provide meaningful responses\n5. Ensure proper documentation for each API endpoint\n6. Implement logging for better traceability\n7. Use environment variables for configuration\n8. Implement unit tests for critical functionality\n\n## Quality Standards\nTo maintain high quality standards, ensure code reviews are conducted for each pull request, adhere to coding standards, perform regular testing, and monitor performance metrics to identify bottlenecks and optimize where necessary.\n\n## Next Steps\nAfter setting up the initial folder structure and implementing basic functionality, the next steps involve integrating with frontend applications, implementing authentication and authorization mechanisms, setting up continuous integration and deployment pipelines, and conducting thorough testing to ensure reliability.\n\n## Key Features of the Generated Prompt\n- Comprehensive Project Structure\n- Technology-Specific Guidance\n- Security & Quality\n- Documentation & Maintenance\n- DevOps Integration"
+    },
+    "agileArtifacts": {
+      "raw": "Epic\n\nEnable seamless communication between systems through a REST API.\n\nFeatures\n\nFeature 1: API Endpoints\nFeature 2: Data Validation\nFeature 3: Authentication and Authorization\n\nUser Stories\n\nFeature 1: API Endpoints\n\nUser Story 1: As a developer, I want to create REST API endpoints to allow users to interact with the system, so that data can be retrieved, updated, and deleted easily.\n\nAcceptance Criteria:\nGiven the API is running\nWhen a GET request is made to /api/data\nThen the system should return a list of data in JSON format\n\nFeature 2: Data Validation\n\nUser Story 2: As a system administrator, I want to ensure that data input through the API is validated to maintain data integrity, so that only valid data is stored in the system.\n\nAcceptance Criteria:\nGiven a POST request is made to /api/data with invalid data\nWhen the data is missing required fields\nThen the system should return a 400 Bad Request error\n\nFeature 3: Authentication and Authorization\n\nUser Story 3: As a security officer, I want to implement authentication and authorization mechanisms for the API to control access to sensitive data, so that only authorized users can perform certain actions.\n\nAcceptance Criteria:\nGiven a user tries to access /api/admin\nWhen the user is not authenticated\nThen the system should return a 401 Unauthorized error",
+      "parsed": {
+        "epics": [
+          {
+            "title": "Enable seamless communication between systems through a REST API",
+            "description": "Enable seamless communication between systems through a REST API"
+          }
+        ],
+        "features": [
+          {
+            "title": "API Endpoints",
+            "description": "API Endpoints"
+          },
+          {
+            "title": "Data Validation",
+            "description": "Data Validation"
+          },
+          {
+            "title": "Authentication and Authorization",
+            "description": "Authentication and Authorization"
+          }
+        ],
+        "userStories": [
+          {
+            "feature": "API Endpoints",
+            "story": "As a developer, I want to create REST API endpoints to allow users to interact with the system, so that data can be retrieved, updated, and deleted easily.",
+            "acceptanceCriteria": "Given the API is running\nWhen a GET request is made to /api/data\nThen the system should return a list of data in JSON format"
+          },
+          {
+            "feature": "Data Validation",
+            "story": "As a system administrator, I want to ensure that data input through the API is validated to maintain data integrity, so that only valid data is stored in the system.",
+            "acceptanceCriteria": "Given a POST request is made to /api/data with invalid data\nWhen the data is missing required fields\nThen the system should return a 400 Bad Request error"
+          },
+          {
+            "feature": "Authentication and Authorization",
+            "story": "As a security officer, I want to implement authentication and authorization mechanisms for the API to control access to sensitive data, so that only authorized users can perform certain actions.",
+            "acceptanceCriteria": "Given a user tries to access /api/admin\nWhen the user is not authenticated\nThen the system should return a 401 Unauthorized error"
+          }
+        ]
+      }
+    },
+    "metadata": {
+      "version": "1.0",
+      "generatedBy": "Backend Prompt Generator",
+      "totalEpics": 1,
+      "totalFeatures": 5,
+      "totalUserStories": 3,
+      "totalFiles": 4,
+      "totalBestPractices": 4,
+      "totalAgileFeatures": 3
+    }
+  }
+]

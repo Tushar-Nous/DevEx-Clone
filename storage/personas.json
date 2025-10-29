@@ -1,0 +1,327 @@
+[
+  {
+    "id": "qa-engineer",
+    "name": "QA Engineer",
+    "title": "Quality Assurance Engineer",
+    "description": "Focused on testing, quality assurance, and ensuring software reliability",
+    "department": "Quality Assurance",
+    "experience": "Senior",
+    "avatar": "🧪",
+    "gradient": "from-purple-500 to-indigo-600",
+    "skills": [
+      "Test Automation",
+      "Manual Testing",
+      "Bug Tracking",
+      "Performance Testing",
+      "API Testing"
+    ],
+    "responsibilities": [
+      "Design and execute test plans",
+      "Identify and report software defects",
+      "Automate testing processes",
+      "Ensure quality standards compliance"
+    ],
+    "painPoints": [
+      "Time-consuming manual testing",
+      "Difficulty in reproducing bugs",
+      "Integration testing complexity"
+    ],
+    "goals": [
+      "Increase test automation coverage",
+      "Reduce time to identify defects",
+      "Improve test reporting"
+    ],
+    "tools": [
+      "Selenium",
+      "Jest",
+      "Postman",
+      "JIRA",
+      "TestRail"
+    ],
+    "context": "testing, quality assurance, bug tracking, automation, validation",
+    "empathyData": {
+      "quote": "I need to catch bugs before they reach production",
+      "frustrations": [
+        "Manual regression takes too long",
+        "Hard to track test coverage"
+      ],
+      "motivations": [
+        "Deliver quality software",
+        "Automate repetitive tasks"
+      ]
+    }
+  },
+  {
+    "id": "senior-developer",
+    "name": "Senior Developer",
+    "title": "Senior Software Developer",
+    "description": "Experienced developer specializing in full-stack development and architecture",
+    "department": "Engineering",
+    "experience": "Senior",
+    "avatar": "👨‍💻",
+    "gradient": "from-blue-500 to-cyan-600",
+    "skills": [
+      "React",
+      "Node.js",
+      "Python",
+      "AWS",
+      "Docker",
+      "Microservices"
+    ],
+    "responsibilities": [
+      "Design and implement software solutions",
+      "Code review and mentoring",
+      "Architecture planning",
+      "Technical documentation"
+    ],
+    "painPoints": [
+      "Technical debt management",
+      "Balancing speed with code quality",
+      "Keeping up with technology changes"
+    ],
+    "goals": [
+      "Build scalable architectures",
+      "Mentor junior developers",
+      "Reduce technical debt"
+    ],
+    "tools": [
+      "VS Code",
+      "Git",
+      "Docker",
+      "AWS",
+      "MongoDB"
+    ],
+    "context": "development, architecture, code quality, technical leadership, implementation",
+    "empathyData": {
+      "quote": "I want to write clean, maintainable code that scales",
+      "frustrations": [
+        "Unclear requirements",
+        "Legacy code maintenance",
+        "Context switching"
+      ],
+      "motivations": [
+        "Technical excellence",
+        "Team growth",
+        "Innovation"
+      ]
+    }
+  },
+  {
+    "id": "devops-engineer",
+    "name": "DevOps Engineer",
+    "title": "DevOps & Infrastructure Engineer",
+    "description": "Specializes in CI/CD, infrastructure automation, and deployment strategies",
+    "department": "Infrastructure",
+    "experience": "Senior",
+    "avatar": "⚙️",
+    "gradient": "from-green-500 to-emerald-600",
+    "skills": [
+      "Kubernetes",
+      "Jenkins",
+      "Terraform",
+      "AWS",
+      "Monitoring",
+      "Security"
+    ],
+    "responsibilities": [
+      "Manage CI/CD pipelines",
+      "Infrastructure as Code",
+      "System monitoring and alerting",
+      "Security compliance"
+    ],
+    "painPoints": [
+      "Manual deployment processes",
+      "Infrastructure inconsistencies",
+      "Alert fatigue"
+    ],
+    "goals": [
+      "Achieve 99.9% uptime",
+      "Automate infrastructure provisioning",
+      "Reduce deployment time"
+    ],
+    "tools": [
+      "Jenkins",
+      "Kubernetes",
+      "Terraform",
+      "Prometheus",
+      "Grafana"
+    ],
+    "context": "deployment, infrastructure, automation, monitoring, ci/cd, pipelines",
+    "empathyData": {
+      "quote": "I need reliable, automated deployments with zero downtime",
+      "frustrations": [
+        "Manual interventions",
+        "Inconsistent environments",
+        "False alerts"
+      ],
+      "motivations": [
+        "System reliability",
+        "Automation",
+        "Efficiency"
+      ]
+    }
+  },
+  {
+    "id": "security-analyst",
+    "name": "Security Analyst",
+    "title": "Cybersecurity Analyst",
+    "description": "Focuses on security assessments, vulnerability management, and compliance",
+    "department": "Security",
+    "experience": "Mid-Level",
+    "avatar": "🔒",
+    "gradient": "from-red-500 to-pink-600",
+    "skills": [
+      "Penetration Testing",
+      "Vulnerability Assessment",
+      "SIEM",
+      "Compliance",
+      "Risk Management"
+    ],
+    "responsibilities": [
+      "Conduct security assessments",
+      "Monitor security threats",
+      "Ensure compliance standards",
+      "Incident response management"
+    ],
+    "painPoints": [
+      "Keeping up with emerging threats",
+      "Balancing security with usability",
+      "Compliance reporting overhead"
+    ],
+    "goals": [
+      "Proactively identify vulnerabilities",
+      "Improve incident response time",
+      "Maintain compliance"
+    ],
+    "tools": [
+      "Nessus",
+      "Burp Suite",
+      "Splunk",
+      "Wireshark",
+      "Metasploit"
+    ],
+    "context": "security, compliance, vulnerability management, risk assessment, penetration testing",
+    "empathyData": {
+      "quote": "I need to protect our systems without hindering productivity",
+      "frustrations": [
+        "Late security reviews",
+        "Complex compliance requirements",
+        "False positives"
+      ],
+      "motivations": [
+        "Risk mitigation",
+        "Regulatory compliance",
+        "User safety"
+      ]
+    }
+  },
+  {
+    "id": "product-manager",
+    "name": "Product Manager",
+    "title": "Senior Product Manager",
+    "description": "Drives product strategy, roadmap planning, and stakeholder coordination",
+    "department": "Product",
+    "experience": "Senior",
+    "avatar": "📊",
+    "gradient": "from-orange-500 to-amber-600",
+    "skills": [
+      "Product Strategy",
+      "Roadmap Planning",
+      "User Research",
+      "Analytics",
+      "Agile"
+    ],
+    "responsibilities": [
+      "Define product vision and strategy",
+      "Coordinate with stakeholders",
+      "Analyze user feedback and metrics",
+      "Prioritize feature development"
+    ],
+    "painPoints": [
+      "Competing stakeholder priorities",
+      "Limited resources for all features",
+      "Measuring product success"
+    ],
+    "goals": [
+      "Increase user satisfaction",
+      "Drive product adoption",
+      "Deliver valuable features"
+    ],
+    "tools": [
+      "JIRA",
+      "Figma",
+      "Analytics",
+      "Miro",
+      "Slack"
+    ],
+    "context": "product strategy, stakeholder management, user research, roadmap planning, prioritization",
+    "empathyData": {
+      "quote": "I need to balance user needs with business objectives",
+      "frustrations": [
+        "Unclear user needs",
+        "Resource constraints",
+        "Alignment challenges"
+      ],
+      "motivations": [
+        "User value",
+        "Business growth",
+        "Team collaboration"
+      ]
+    }
+  },
+  {
+    "id": "data-analyst",
+    "name": "Data Analyst",
+    "title": "Senior Data Analyst",
+    "description": "Specializes in data analysis, reporting, and business intelligence",
+    "department": "Analytics",
+    "experience": "Senior",
+    "avatar": "📈",
+    "gradient": "from-teal-500 to-cyan-600",
+    "skills": [
+      "SQL",
+      "Python",
+      "Tableau",
+      "Statistics",
+      "Machine Learning",
+      "ETL"
+    ],
+    "responsibilities": [
+      "Analyze business data and trends",
+      "Create reports and dashboards",
+      "Provide data-driven insights",
+      "Maintain data quality standards"
+    ],
+    "painPoints": [
+      "Data quality issues",
+      "Ad-hoc analysis requests",
+      "Complex data integration"
+    ],
+    "goals": [
+      "Provide actionable insights",
+      "Automate reporting",
+      "Improve data accuracy"
+    ],
+    "tools": [
+      "SQL",
+      "Python",
+      "Tableau",
+      "Power BI",
+      "Excel"
+    ],
+    "context": "data analysis, reporting, business intelligence, analytics, insights, metrics",
+    "empathyData": {
+      "quote": "I need clean, accessible data to drive business decisions",
+      "frustrations": [
+        "Inconsistent data",
+        "Manual report generation",
+        "Data silos"
+      ],
+      "motivations": [
+        "Data-driven decisions",
+        "Business impact",
+        "Automation"
+      ]
+    }
+  }
+]

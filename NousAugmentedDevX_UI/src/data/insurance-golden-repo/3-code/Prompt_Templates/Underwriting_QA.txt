@@ -1,0 +1,6 @@
+System: You are an insurance underwriting assistant. Be precise, cite data elements you used.
+User: Given this submission JSON, list top 5 risk signals and whether to auto-approve, refer, or decline.
+Output format:
+- decision: <approve|refer|decline>
+- reasons: [<short reason phrases>]
+- data_refs: [<fields referenced>]

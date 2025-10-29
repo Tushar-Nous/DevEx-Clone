@@ -1,0 +1,3 @@
+policy_id,effective_date,state,annual_premium,prior_claims,valuation_basis,construction,form,coverage_a,protection_class,year_built
+HO-2001,2024-02-10,FL,1200,1,RCV,Frame,H06,200000,PC5,1995
+HO-2002,2024-05-05,CA,1450,0,RCV,Masonry,H03,450000,PC3,2010

@@ -1,0 +1,4 @@
+policy_id,effective_date,state,annual_premium,prior_claims,liability_limits,channel,tenure_months,vehicle_type,driver_age,annual_mileage,violations
+PA-1001,2024-01-15,CA,850,0,100/300/100,Agent,36,Sedan,32,12000,0
+PA-1002,2024-03-01,TX,730,1,50/100/50,Direct,12,SUV,45,8000,1
+PA-1003,2024-04-20,NY,920,0,250/500/250,Broker,60,Truck,54,15000,0

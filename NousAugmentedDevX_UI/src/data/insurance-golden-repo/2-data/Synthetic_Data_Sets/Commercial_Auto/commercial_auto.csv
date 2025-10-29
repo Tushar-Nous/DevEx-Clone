@@ -1,0 +1,3 @@
+policy_id,effective_date,state,annual_premium,prior_claims,fleet_type,vehicles,drivers,radius
+CA-3001,2024-01-01,IL,5400,2,Fleet,12,5,Local
+CA-3002,2024-06-01,PA,6100,0,Non-Fleet,24,2,Regional

@@ -1,0 +1,32 @@
+{
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": [
+      "/static/*",         
+      "/assets/*",
+      "/images/*",
+      "/favicon.ico",
+      "/icon.png",
+      "/manifest.json"
+    ]
+  },
+  "routes": [
+    { "route": "/backend-prompt-generator", "rewrite": "/index.html" },
+    { "route": "/guidelines-generator", "rewrite": "/index.html" },
+    { "route": "/generation-history", "rewrite": "/index.html" },
+    { "route": "/devops-integration", "rewrite": "/index.html" },
+    { "route": "/user-stories", "rewrite": "/index.html" },
+    { "route": "/golden-repo", "rewrite": "/index.html" },
+    { "route": "/knowledge-base", "rewrite": "/index.html" },
+    { "route": "/persona-manager", "rewrite": "/index.html" },
+    { "route": "/prompt-library", "rewrite": "/index.html" }
+  ],
+  "mimeTypes": {
+    ".js": "application/javascript",
+    ".css": "text/css",
+    ".json": "application/json"
+  },
+  "responseOverrides": {
+    "404": { "rewrite": "/index.html", "statusCode": 200 }
+  }
+}
